@@ -36,6 +36,7 @@
     [super viewDidLoad];
 	
     // Set the 'menu button
+    // 主button的状态切换渐变开关
     [self.menuButton initAnimationWithFadeEffectEnabled:YES]; // Set to 'NO' to disable Fade effect between its two-state transition
     
     // Get the 'menu item view' from storyboard

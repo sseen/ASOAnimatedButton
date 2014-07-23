@@ -153,7 +153,7 @@
         theAnimation.path=thePath;
         
         if (animationStyle != ASOAnimationStyleRiseConcurrently) {
-            theAnimation.duration = [self.speed floatValue] * (item + 1);
+            theAnimation.duration = [self.speed floatValue] * (1+0.1*item);
         } else {
             theAnimation.duration = [self.speed floatValue];
         }
@@ -200,7 +200,9 @@
         theFadeOutAnimation.toValue = [NSNumber numberWithFloat:0.0];
         
         if (animationStyle != ASOAnimationStyleRiseConcurrently) {
-            theFadeOutAnimation.duration = [self.speed floatValue] * (item + 1);
+//            theFadeOutAnimation.duration = [self.speed floatValue] * (item + 1);
+            theFadeOutAnimation.duration = [self.speed floatValue] * (1+0.1*item);
+//            theFadeOutAnimation.duration = [self.speed floatValue];
         } else {
             theFadeOutAnimation.duration = [self.speed floatValue];
         }
