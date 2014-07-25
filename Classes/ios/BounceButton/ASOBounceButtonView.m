@@ -52,6 +52,7 @@
 - (void)setAnimationStartFromHere:(CGRect)startingViewFrame
 {
     [self layoutIfNeeded];
+    // 找到中心起点
     self.startAnimationPoint = CGPointMake(startingViewFrame.origin.x + (startingViewFrame.size.width/2), startingViewFrame.origin.y + (startingViewFrame.size.height/2));
 }
 
@@ -131,8 +132,11 @@
         
         for (int16_t idx = startIdx; idx <= item; idx++) {
             UIButton *bounceButton = [self.bounceButtons objectAtIndex:idx];
+            NSLog(@"%f, %f", bounceButton.center.x, bounceButton.center.y);
             
-            currentButtonPosition = CGPointMake(bounceButton.frame.origin.x + (bounceButton.frame.size.width/2), bounceButton.frame.origin.y + (bounceButton.frame.size.height/2));
+            // 这种写法完全可以用上面的来取代，代码优化
+//            currentButtonPosition = CGPointMake(bounceButton.frame.origin.x + (bounceButton.frame.size.width/2), bounceButton.frame.origin.y + (bounceButton.frame.size.height/2));
+            currentButtonPosition = bounceButton.center;
             
             if (idx == item) {
                 // Calculate the bounce target point
@@ -153,7 +157,7 @@
         theAnimation.path=thePath;
         
         if (animationStyle != ASOAnimationStyleRiseConcurrently) {
-            theAnimation.duration = [self.speed floatValue] * (1+0.1*item);
+            theAnimation.duration = [self.speed floatValue] * (1+item);
         } else {
             theAnimation.duration = [self.speed floatValue];
         }
@@ -200,8 +204,7 @@
         theFadeOutAnimation.toValue = [NSNumber numberWithFloat:0.0];
         
         if (animationStyle != ASOAnimationStyleRiseConcurrently) {
-//            theFadeOutAnimation.duration = [self.speed floatValue] * (item + 1);
-            theFadeOutAnimation.duration = [self.speed floatValue] * (1+0.1*item);
+            theFadeOutAnimation.duration = [self.speed floatValue] * (item + 1);
 //            theFadeOutAnimation.duration = [self.speed floatValue];
         } else {
             theFadeOutAnimation.duration = [self.speed floatValue];
@@ -214,6 +217,7 @@
         
         if (animationStyle != ASOAnimationStyleRiseConcurrently) {
             groupedAnimation.duration = [self.speed floatValue] * (item + 1);
+//            theFadeOutAnimation.duration = [self.speed floatValue] * (1+10.1*item);
         } else {
             groupedAnimation.duration = [self.speed floatValue];
         }
